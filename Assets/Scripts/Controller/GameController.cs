@@ -113,6 +113,8 @@ public class GameController : MonoBehaviour
         rb.gravityScale = 0;
         Data.Instance.checkShoot = false;
 
+        Level.Instance.saveData();
+         
         StartCoroutine(ExecuteAfterDelay());
       
     }

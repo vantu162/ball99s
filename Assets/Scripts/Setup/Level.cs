@@ -47,5 +47,22 @@ public class Level: MonoBehaviour
             Debug.LogError("Không thể tìm thấy tệp JSON tại đường dẫn: " + path);
         }
     }
+
+    public void saveData()
+    {
+        var data = new { bullet = 10 , point = 30,  star = 15 };
+
+        // Convert the object to JSON
+        string jsonData = JsonConvert.SerializeObject(data, Formatting.Indented);
+
+        // Specify the file path
+        string filePath = Application.dataPath + "/Resources/data.json";
+
+        // Write the JSON to a file
+        File.WriteAllText(filePath, jsonData);
+
+        Debug.Log($"Data saved to {filePath}");
+
+    }
    
 }
