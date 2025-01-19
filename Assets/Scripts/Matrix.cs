@@ -83,64 +83,20 @@ public class Matrix : MonoBehaviour
     {
 
         MatrixLoading.SharedInstance.loadLaiMaTrix();
-
         Data.Instance.upDateRowNext(rowCurrent);
         for (int x = 0; x < xx; x++)
         {
             khoiTaoDoiTuong(0, x, matrixParent);
-        }
 
-        //Debug.Log("rowY ================== " + Data.Instance.rowY);
-        //if (rowCurrent <10)
-        //{
-        //    System.Random random = new System.Random();
-        //    for (int y = 0; y < yy; y++)
-        //    {
-        //        if (y == rowCurrent)
-        //        {
-        //            Data.Instance.upDateRowNext(y);
-        //            for (int x = 0; x < xx; x++)
-        //            {
-        //                khoiTaoDoiTuong(y,x, matrixParent);
-        //            }
-        //        }
-
-        //    }
-
-        //    if (rowCurrent == 9)
-        //    {
-
-        //        GameController.SharedInstance.gameEnd();
-        //    }
-        //}
-
-
-    }
-
-
-
-    public static int checkCellOfRowHide(int rowNext)
-    {
-       // Debug.Log("rowNext a =====> " + rowNext);
-        for (int y = rowNext; y >= 0; y--)
-        {
-            for (int x = 0; x < 7; x++)
+            GameObject cell = Data.gridObjects[9, x];
+            if (cell.CompareTag("box") && cell.activeInHierarchy == true || cell.CompareTag("point") && cell.activeInHierarchy == true || cell.CompareTag("star") && cell.activeInHierarchy == true)
             {
-                GameObject cell = Data.gridObjects[y, x];
-               // Debug.Log("Checking cell --------------------------" + y + "___" + cell.tag + "___" + y + ":" + x + "___" + cell.activeInHierarchy);
-
-                if ((cell.tag.Equals("box") && cell.activeInHierarchy == true)
-                    || (cell.tag.Equals("star") && cell.activeInHierarchy == true)
-                    || (cell.tag.Equals("point") && cell.activeInHierarchy == true))
-                {
-                  //  Debug.Log("Condition met at --------------------------" + y + ":" + x + "____"+(y + 1));
-                    return y + 1;
-                }
+                GameController.SharedInstance.gameEnd();
             }
         }
-      //  Debug.Log("Condition met at -------------------------- end");
-        return 0;
+
     }
+
 
     private static void khoiTaoDoiTuong(int y, int x, GameObject Parent)
     {

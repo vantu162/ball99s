@@ -48,9 +48,9 @@ public class Level: MonoBehaviour
         }
     }
 
-    public void saveData()
+    public void saveData(int v, int v2, int v3)
     {
-        var data = new { bullet = 10 , point = 30,  star = 15 };
+        var data = new { bullet = 1 , point = v,  star = v3 };
 
         // Convert the object to JSON
         string jsonData = JsonConvert.SerializeObject(data, Formatting.Indented);

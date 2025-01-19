@@ -56,21 +56,16 @@ public class WallButtom : MonoBehaviour
 
                 collision.transform.GetComponent<CircleCollider2D>().enabled = false;
                 collision.transform.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
-
                 collision.transform.GetComponent<BallMoveto>().Move = true;
-
-
             }
 
 
             if (Data.Instance.countBulletHide == Data.Instance.tatolBullet)
             {
                 TextController.Instance.totalBall = Data.Instance.tatolBullet;
+                //int rowNext = Matrix.checkCellOfRowHide(Data.Instance.rowY);
 
-
-                int rowNext = Matrix.checkCellOfRowHide(Data.Instance.rowY);
-
-                Debug.Log("rowNext b =====> " + rowNext);
+                //Debug.Log("rowNext b =====> " + rowNext);
 
                 Matrix.initBox(0);
 
