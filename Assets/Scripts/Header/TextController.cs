@@ -13,6 +13,7 @@ public class TextController: MonoBehaviour
 
     public int point;
     public int star;
+    public int bullet;
 
     void Awake()
     {

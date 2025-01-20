@@ -31,11 +31,11 @@ public class GameEnd : MonoBehaviour
         getTextGold();
 
 
-        var v = TextController.Instance.totalBox;
-        var v1 = TextController.Instance.totalStar;
-        var v2 = TextController.Instance.totalGold;
+        var box = TextController.Instance.totalBox;
+        var star = TextController.Instance.totalStar;
+        var gold = TextController.Instance.totalGold;
 
-        Level.Instance.saveData(v, v1, v2);
+        Level.Instance.saveData(0, gold, star);
 
 
     }
