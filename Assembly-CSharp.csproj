@@ -64,6 +64,7 @@
     <Compile Include="Assets\Scripts\Ball\BallMoveto.cs" />
     <Compile Include="Assets\Scripts\Box\Cell.cs" />
     <Compile Include="Assets\Scripts\Setup\Data.cs" />
+    <Compile Include="Assets\Scripts\Sound\AudioManager.cs" />
     <Compile Include="Assets\Scripts\Level\MatrixLevel.cs" />
     <Compile Include="Assets\Scripts\Controller\GameWin.cs" />
     <Compile Include="Assets\Scripts\Setup\entity\ObjRange.cs" />

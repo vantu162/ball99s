@@ -46,6 +46,10 @@ public class Bullet : MonoBehaviour
 
             }
 
+            AudioManager.Instance.PlaySFX();
+
+
+
         }
         else if(collision.gameObject.tag == "point")
         {

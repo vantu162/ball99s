@@ -23,7 +23,7 @@ public class Menu : MonoBehaviour
 
     public void closeMenu()
     {
-        gameObjec_Header01.SetActive(true);
+     
         gameObjec_menu.SetActive(false);
 
     }

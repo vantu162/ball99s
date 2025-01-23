@@ -78,44 +78,35 @@ public class Level: MonoBehaviour
 
     public void buy(int type)
     {
-        int b = 0;
-        int g = 0;
-        int s = 0;
+        int b = TextController.Instance.bullet;
+        int g = TextController.Instance.point;
+        int s = TextController.Instance.star;
 
         if (type == 0)
         {
-            g = TextController.Instance.point;
-
             if (g >= 5)
             {
                 g -= 5;
-                b = TextController.Instance.bullet + 1;
-
+                b += 1;
+                TextController.Instance.point = g;
+                TextController.Instance.bullet = b;
             }
-            else
-            {
-                Debug.Log("khong du gold");
-                b = TextController.Instance.bullet;
-            }
-
+          
         }
 
         if (type == 1)
         {
 
-            s = TextController.Instance.point;
 
             if (g >= 5)
             {
                 s -= 5;
-                b = TextController.Instance.bullet + 1;
-
+                b +=1;
+                TextController.Instance.star = s;
+                TextController.Instance.bullet = b;
             }
-            else
-            {
-                b = TextController.Instance.bullet;
-                Debug.Log("khong du star");
-            }
+        
+          
         }
 
         var data = new
@@ -136,6 +127,8 @@ public class Level: MonoBehaviour
 
         Debug.Log($"Data saved to {filePath}");
 
+
+       // readData();
     }
 
 
