@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Header : MonoBehaviour
 {
-    public GameObject itemLeft;
+   // public GameObject itemLeft;
     public GameObject itemCenter;
     public GameObject itemRight;
 
@@ -20,7 +20,7 @@ public class Header : MonoBehaviour
     {
         if (TextController.Instance != null)
         {
-            getItemLeft();
+           // getItemLeft();
             getItemCenter();
             getItemRight();
         }
@@ -30,28 +30,6 @@ public class Header : MonoBehaviour
         }
     }
 
-
-    void getItemLeft()
-    {
-        var v = TextController.Instance.totalGold;
-
-        if (itemLeft != null)
-        {
-            Text textNum = itemLeft.GetComponentInChildren<Text>();
-            if (textNum != null)
-            {
-                textNum.text = v.ToString();
-            }
-            else
-            {
-                Debug.LogError("Text component not found in itemLeft's children.");
-            }
-        }
-        else
-        {
-            Debug.LogError("itemLeft is not assigned.");
-        }
-    }
 
     void getItemCenter()
     {
