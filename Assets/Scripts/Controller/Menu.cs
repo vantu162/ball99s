@@ -21,6 +21,7 @@ public class Menu : MonoBehaviour
         //{
         //    Data.Instance.statusGame = 0;
         //}
+        Data.Instance.chekButton = true;
 
         Time.timeScale = 0;
         gameObjec_menu.SetActive(true);
@@ -36,9 +37,11 @@ public class Menu : MonoBehaviour
         //{
         //    Data.Instance.statusGame = 1;
         //}
+      
         Time.timeScale = 1;
         gameObjec_menu.SetActive(false);
-       
+        Data.Instance.chekButton = false;
+
 
     }
 

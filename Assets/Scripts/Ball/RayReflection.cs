@@ -122,27 +122,27 @@ namespace rayCast
                     // Kiểm tra nếu bấm vào một GameObject trong thế giới 2D
                     Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                     RaycastHit2D hit = Physics2D.Raycast(mousePos, Vector2.zero);
-                    //RaycastHit2D[] hits = Physics2D.RaycastAll(mousePos, Vector2.zero);
 
-                    //if (hits.Length > 0)
+
+                    //Collider2D[] hits = Physics2D.OverlapPointAll(mousePos);
+
+                    //foreach (Collider2D h in hits)
                     //{
-                    //    foreach (RaycastHit2D a in hits)
-                    //    {
-                    //        Debug.Log("GameObject trúng tia ray: " + a.collider.gameObject.name);
-                    //    }
+                    //    Debug.Log("Found: " + h.gameObject.name);
                     //}
+
 
                     if (hit.collider != null)
                     {
+                        Debug.Log("Bấm vào GameObject khác: " + hit.collider.gameObject.name);
                         // Kiểm tra nếu GameObject có tag là "menu"
-                        if (hit.collider.CompareTag("menu") || hit.collider.CompareTag("close"))
+                        if (hit.collider.CompareTag("menu"))
                         {
-                            Debug.Log("Bấm vào "+ hit.collider.gameObject.name + "! Bỏ qua sự kiện.");
                             return; // Không chạy sự kiện Input.GetMouseButtonUp(0)
                         }
-
-                        Debug.Log("Bấm vào GameObject khác: " + hit.collider.gameObject.name);
                     }
+
+
 
                     if (Data.Instance.checkShoot == true )
                     {

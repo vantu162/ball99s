@@ -37,6 +37,9 @@ public class Data: MonoBehaviour
     public int index = 50;
 
 
+    public bool chekButton = false;
+
+
     void Awake()
     {
         if (Instance != null && Instance != this)

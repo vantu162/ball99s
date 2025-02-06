@@ -429,6 +429,7 @@ MonoBehaviour:
   a: 1
   b: 3
   index: 10
+  chekButton: 0
 --- !u!114 &60635383
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2005,7 +2006,7 @@ GameObject:
   - component: {fileID: 734295319}
   - component: {fileID: 734295318}
   - component: {fileID: 734295317}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2128,7 +2129,7 @@ GameObject:
   - component: {fileID: 765436940}
   - component: {fileID: 765436943}
   - component: {fileID: 765436944}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: Buttom
   m_TagString: button_Wall
   m_Icon: {fileID: 0}
@@ -2289,7 +2290,7 @@ GameObject:
   - component: {fileID: 778915494}
   - component: {fileID: 778915493}
   - component: {fileID: 778915492}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2673,7 +2674,7 @@ GameObject:
   - component: {fileID: 914935849}
   - component: {fileID: 914935852}
   - component: {fileID: 914935853}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: back
   m_TagString: close
   m_Icon: {fileID: 0}
@@ -2809,7 +2810,7 @@ BoxCollider2D:
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_LayerOverridePriority: 0
+  m_LayerOverridePriority: 10
   m_ForceSendLayers:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -5961,7 +5962,7 @@ GameObject:
   - component: {fileID: 1664851079}
   - component: {fileID: 1664851078}
   - component: {fileID: 1664851077}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: Top
   m_TagString: Untagged
   m_Icon: {fileID: 0}
