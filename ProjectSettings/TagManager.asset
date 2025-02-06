@@ -12,6 +12,8 @@ TagManager:
   - box
   - ballFirst
   - itemLevel
+  - menu
+  - close
   layers:
   - Default
   - TransparentFX

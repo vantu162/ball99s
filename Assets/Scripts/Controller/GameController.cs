@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -22,7 +23,7 @@ public class GameController : MonoBehaviour
 
     public void startGame()
     {
-       
+       // StartCoroutine(ActivateBallAfterDelay(0.3f));
 
         Data.Instance.checkSecondBall = true;
         gamePlay.SetActive(false);
@@ -35,6 +36,7 @@ public class GameController : MonoBehaviour
 
     public void startGameType02()
     {
+        //StartCoroutine(ActivateBallAfterDelay(0.3f));
 
         Data.Instance.checkSecondBall = true;
         gamePlay.SetActive(false);
@@ -46,11 +48,34 @@ public class GameController : MonoBehaviour
         headerAll.SetActive(false);
     }
 
-    public void exitsMenu()
+    IEnumerator ActivateBallAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        ballFirst.SetActive(true);
+    }
+
+    public void returnHome()
     {
 
+        Data.Instance.statusGame = 0;
+        gamePlay.SetActive(true);
+        ballFirst.SetActive(true);
+        Data.Instance.checkSecondBall = true;
+        Rigidbody2D rb = ballFirst.GetComponent<Rigidbody2D>();
+        rb.gravityScale = 0f;
+        //Data.Instance.upDateTatolBullet(5);
+
+        Level.Instance.readData();
+        TextController.Instance.UpdateTotalStar(0);
+        TextController.Instance.UpdateTotalGold(0);
+        TextController.Instance.UpdateTotalBox(0);
+        Data.Instance.upDateRowNext(0);
         gameOver.SetActive(false);
-        SceneManager.LoadScene(0);
+
+        Matrix.Reset();
+
+
+
     }
 
     public void pauseGame()
@@ -69,7 +94,6 @@ public class GameController : MonoBehaviour
         //Data.Instance.upDateTatolBullet(5);
 
         Level.Instance.readData();
-
         TextController.Instance.UpdateTotalStar(0);
         TextController.Instance.UpdateTotalGold(0);
         TextController.Instance.UpdateTotalBox(0);

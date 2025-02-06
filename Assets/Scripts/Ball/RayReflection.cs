@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.EventSystems;
+
 namespace rayCast
 {
     public class RayReflection : MonoBehaviour
@@ -33,6 +36,20 @@ namespace rayCast
             if ((int)status == Data.Instance.statusGame)
             {
 
+                Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                RaycastHit2D hit = Physics2D.Raycast(mousePos, Vector2.zero);
+
+                if (hit.collider != null)
+                {
+                    // Kiểm tra nếu GameObject có tag là "menu"
+                    if (hit.collider.CompareTag("menu"))
+                    {
+                        return; // Không chạy sự kiện Input.GetMouseButtonUp(0)
+                    }
+
+                }
+
+
                 if (Input.GetMouseButton(0))
                 {
                     line.enabled = true;                 
@@ -48,6 +65,9 @@ namespace rayCast
                     line.enabled = false;
                 }
             }
+
+
+
         }
 
         private Vector2 direction;
@@ -95,10 +115,36 @@ namespace rayCast
 
             if ((int)status == Data.Instance.statusGame)
             {
-
+                
                 if (Input.GetMouseButtonUp(0))
                 {
-                    if (Data.Instance.checkShoot == true)
+
+                    // Kiểm tra nếu bấm vào một GameObject trong thế giới 2D
+                    Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                    RaycastHit2D hit = Physics2D.Raycast(mousePos, Vector2.zero);
+                    //RaycastHit2D[] hits = Physics2D.RaycastAll(mousePos, Vector2.zero);
+
+                    //if (hits.Length > 0)
+                    //{
+                    //    foreach (RaycastHit2D a in hits)
+                    //    {
+                    //        Debug.Log("GameObject trúng tia ray: " + a.collider.gameObject.name);
+                    //    }
+                    //}
+
+                    if (hit.collider != null)
+                    {
+                        // Kiểm tra nếu GameObject có tag là "menu"
+                        if (hit.collider.CompareTag("menu") || hit.collider.CompareTag("close"))
+                        {
+                            Debug.Log("Bấm vào "+ hit.collider.gameObject.name + "! Bỏ qua sự kiện.");
+                            return; // Không chạy sự kiện Input.GetMouseButtonUp(0)
+                        }
+
+                        Debug.Log("Bấm vào GameObject khác: " + hit.collider.gameObject.name);
+                    }
+
+                    if (Data.Instance.checkShoot == true )
                     {
                         StartCoroutine(ShootBalls());
                     }

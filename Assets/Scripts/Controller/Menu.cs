@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 
 public class Menu : MonoBehaviour
@@ -15,16 +16,29 @@ public class Menu : MonoBehaviour
 
     public void openMenu()
     {
-        gameObjec_Header01.SetActive(false);
+
+        //if (Data.Instance.statusGame != 0)
+        //{
+        //    Data.Instance.statusGame = 0;
+        //}
+
+        Time.timeScale = 0;
         gameObjec_menu.SetActive(true);
+        //  gameObjec_Header01.SetActive(false);
+
 
     }
 
 
     public void closeMenu()
     {
-     
+        //if (Data.Instance.statusGame == 0)
+        //{
+        //    Data.Instance.statusGame = 1;
+        //}
+        Time.timeScale = 1;
         gameObjec_menu.SetActive(false);
+       
 
     }
 

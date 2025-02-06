@@ -20,25 +20,25 @@ public class Matrix : MonoBehaviour
         matrixParent = broudMatrix;
 
         Data.gridObjects = new GameObject[yy, xx];
-        BoxCollider2D parentCollider = matrixParent.GetComponent<BoxCollider2D>();
-
-        if (parentCollider == null)
+        //BoxCollider2D parentCollider = matrixParent.GetComponent<BoxCollider2D>();
+        RectTransform rectTransform = matrixParent.GetComponent<RectTransform>();
+        if (rectTransform == null)
         {
             Debug.LogError("GameObjectParent must have a BoxCollider2D component.");
             return;
         }
 
-        Vector2 parentSize = parentCollider.size;
-        float cellWidth = parentSize.x / xx;
-        float cellHeight = parentSize.y / yy;
+        //Vector2 parentSize = parentCollider.size;
+        float cellWidth = rectTransform.rect.width / xx;
+        float cellHeight = rectTransform.rect.height / yy;
 
         for (int row = 0; row < yy; row++)
         {
             for (int col = 0; col < xx; col++)
             {
                 // Tính toán vị trí spawn sao cho nó nằm trong BoxCollider2D của gameObjectParent
-                float spawnX = (col + 0.5f) * cellWidth - parentSize.x / 2f;
-                float spawnY = -((row + 0.5f) * cellHeight - parentSize.y / 2f);
+                float spawnX = (col + 0.5f) * cellWidth - rectTransform.rect.width / 2f;
+                float spawnY = -((row + 0.5f) * cellHeight - rectTransform.rect.height / 2f);
                 Vector2 spawnPos = new Vector2(spawnX, spawnY);
                 GameObject newObject = ObjectPools.SharedInstance.GetObjectFromPool(1);
 

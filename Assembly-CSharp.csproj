@@ -60,6 +60,7 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\Ball\DottedLine.cs" />
     <Compile Include="Assets\Scripts\ImageCell.cs" />
+    <Compile Include="Assets\Scripts\Controller\Switch.cs" />
     <Compile Include="Assets\Scripts\Controller\GameController.cs" />
     <Compile Include="Assets\Scripts\Ball\BallMoveto.cs" />
     <Compile Include="Assets\Scripts\Box\Cell.cs" />
@@ -83,7 +84,6 @@
     <Compile Include="Assets\Scripts\MatrixLoading.cs" />
     <Compile Include="Assets\Scripts\Header\TextController.cs" />
     <Compile Include="Assets\Scripts\Level\ClickItem.cs" />
-    <Compile Include="Assets\Scripts\Ball\BallPool.cs" />
     <Compile Include="Assets\Scripts\Controller\GameEnd.cs" />
     <Compile Include="Assets\Scripts\Setup\Level.cs" />
     <Compile Include="Assets\Scripts\Ball\RayReflection.cs" />
