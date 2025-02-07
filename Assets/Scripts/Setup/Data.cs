@@ -31,13 +31,11 @@ public class Data: MonoBehaviour
     public int page = 0;
 
 
+    public bool checBtn = false;
 
     public int a = 1;
     public int b = 3;
     public int index = 50;
-
-
-    public bool chekButton = false;
 
 
     void Awake()

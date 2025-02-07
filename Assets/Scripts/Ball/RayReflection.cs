@@ -111,36 +111,45 @@ namespace rayCast
         public void Update()
         {
 
+
+            //if (EventSystem.current.IsPointerOverGameObject())
+            //{
+            //    return; // Nếu nhấn vào UI hoặc GameObject, bỏ qua Input
+            //}
+
+
+
             var status = EnumScript.gameStatus.play;
 
             if ((int)status == Data.Instance.statusGame)
             {
                 
-                if (Input.GetMouseButtonUp(0))
+                if (!Data.Instance.checBtn && Input.GetMouseButtonUp(0))
                 {
 
-                    // Kiểm tra nếu bấm vào một GameObject trong thế giới 2D
-                    Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                    RaycastHit2D hit = Physics2D.Raycast(mousePos, Vector2.zero);
+                    //// Kiểm tra nếu bấm vào một GameObject trong thế giới 2D
+                    //Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                    //RaycastHit2D hit = Physics2D.Raycast(mousePos, Vector2.zero);
 
 
-                    //Collider2D[] hits = Physics2D.OverlapPointAll(mousePos);
+                    ////Collider2D[] hits = Physics2D.OverlapPointAll(mousePos);
 
-                    //foreach (Collider2D h in hits)
+                    ////foreach (Collider2D h in hits)
+                    ////{
+                    ////    Debug.Log("Found: " + h.gameObject.name);
+                    ////}
+
+
+                    //if (hit.collider != null)
                     //{
-                    //    Debug.Log("Found: " + h.gameObject.name);
+                    //    Debug.Log("Bấm vào GameObject khác: " + hit.collider.gameObject.name);
+                    //    // Kiểm tra nếu GameObject có tag là "menu"
+                    //    if (hit.collider.CompareTag("menu"))
+                    //    {
+ 
+                    //        return; // Không chạy sự kiện Input.GetMouseButtonUp(0)
+                    //    }
                     //}
-
-
-                    if (hit.collider != null)
-                    {
-                        Debug.Log("Bấm vào GameObject khác: " + hit.collider.gameObject.name);
-                        // Kiểm tra nếu GameObject có tag là "menu"
-                        if (hit.collider.CompareTag("menu"))
-                        {
-                            return; // Không chạy sự kiện Input.GetMouseButtonUp(0)
-                        }
-                    }
 
 
 

@@ -20,7 +20,6 @@ public class Header : MonoBehaviour
     {
         if (TextController.Instance != null)
         {
-           // getItemLeft();
             getItemCenter();
             getItemRight();
         }

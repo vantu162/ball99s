@@ -16,13 +16,11 @@ public class Menu : MonoBehaviour
 
     public void openMenu()
     {
-
+        Data.Instance.checBtn = true;
         //if (Data.Instance.statusGame != 0)
         //{
         //    Data.Instance.statusGame = 0;
         //}
-        Data.Instance.chekButton = true;
-
         Time.timeScale = 0;
         gameObjec_menu.SetActive(true);
         //  gameObjec_Header01.SetActive(false);
@@ -37,12 +35,15 @@ public class Menu : MonoBehaviour
         //{
         //    Data.Instance.statusGame = 1;
         //}
-      
         Time.timeScale = 1;
         gameObjec_menu.SetActive(false);
-        Data.Instance.chekButton = false;
 
+        Invoke("ResetClosing", 0.5f); // Chặn trong 0.5 giây
+    }
 
+    void ResetClosing()
+    {
+        Data.Instance.checBtn = false;
     }
 
     public void buyBulletByGold()
