@@ -12,119 +12,161 @@ public class MatrixLoading : MonoBehaviour
     {
          SharedInstance = this;
     }
-    public void loadLaiMaTrix()
+    public void loadLaiMaTrix(int type)
     {
-      
         for (int y = 9; y >=0; y--)
         {
             for (int x = 0; x < 7; x++)
             {
-                GameObject cell = Data.gridObjects[y, x];
-           
-                if (cell.CompareTag("box") && cell.activeInHierarchy == true)
-                                {
-                                    //Debug.Log("yx: " + y + "_" + x);
-                                    //Debug.Log("yx*: " + (y+1) + "_" + x);
-
-                                    Vector3 pos = cell.transform.position;
-                                    GameObject cellX = ObjectPools.SharedInstance.GetObjectFromPool(1);
-                                    if (cellX != null)
-                                    {
-                                        cellX.transform.position = pos;
-                                        cellX.SetActive(true);
-                                        getPositon(cell, cellX);
-                                    }
-                                    cell.SetActive(false);
-
-
-                                    GameObject cellNew = ObjectPools.SharedInstance.GetObjectFromPool(2);
-                                    if (cellNew != null)
-                                    {
-
-                                        GameObject g = Data.gridObjects[y + 1, x];
-                                        Vector3 posG = g.transform.position;
-                                        g.SetActive(false);
-
-                                        cellNew.transform.position = posG;
-                                        cellNew.SetActive(true);
-
-                                        Text textNum = cell.GetComponentInChildren<Text>();
-                                        int num = int.Parse(textNum.text);
-
-                                        textNum.text = num.ToString();
-                                        Image img = cell.gameObject.GetComponent<Image>();
-                                        img.sprite = ImageCell.SharedInstance.img(num);
-
-                                        Data.gridObjects[y + 1, x] = cellNew;
-                                    }
-
-                                }
-
-                if (cell.CompareTag("star") && cell.activeInHierarchy == true)
+                if (type == 0)
                 {
+                  
+                    GameObject cell = Data.gridObjects[y, x];
                    
-                    Vector3 pos = cell.transform.position;
-                    GameObject cellX = ObjectPools.SharedInstance.GetObjectFromPool(1);
-                    if (cellX != null)
+
+                    if (cell.CompareTag("box") && cell.activeInHierarchy == true)
                     {
-                        cellX.transform.position = pos;
-                        cellX.SetActive(true);
-                        getPositon(cell, cellX);
+                        cell.SetActive(false);
+                        Debug.Log("yx: " + y + "_" + x + "| name: " + cell.name);
+                        Text textNum = cell.GetComponentInChildren<Text>();
+                        //Debug.Log("yx: " + y + "_" + x);
+                        //Debug.Log("yx*: " + (y + 1) + "_" + x +" || "+ int.Parse(textNum.text));
+                        Vector3 pos = cell.transform.position;
+                        GameObject cellX = ObjectPools.SharedInstance.GetObjectFromPool(1);
+                        if (cellX != null)
+                        {
+                            cellX.transform.position = pos;
+                            cellX.SetActive(true);
+                            getPositon(cell, cellX);
+                        }
+                       
+
+                        GameObject cellNew = ObjectPools.SharedInstance.GetObjectFromPool(2);
+                        if (cellNew != null)
+                        {
+                            GameObject g = Data.gridObjects[y + 1, x];
+                            Vector3 posG = g.transform.position;
+                            g.SetActive(false);
+
+                            cellNew.transform.position = posG;
+                            cellNew.SetActive(true);
+                            Text textNumX = cellNew.GetComponentInChildren<Text>();
+                            int num = int.Parse(textNum.text);
+                            textNumX.text = num.ToString();
+                            Image img = cell.gameObject.GetComponent<Image>();
+                            img.sprite = ImageCell.SharedInstance.img(num);
+                            Data.gridObjects[y + 1, x] = cellNew;
+                        }
                     }
 
-                    cell.SetActive(false);
-                    GameObject cellNew = ObjectPools.SharedInstance.GetObjectFromPool(3);
-                    if (cellNew != null)
+                    if (cell.CompareTag("star") && cell.activeInHierarchy == true)
                     {
-                        GameObject g = Data.gridObjects[y + 1, x];
-                        Vector3 posG = g.transform.position;
-                        g.SetActive(false);
+                        Vector3 pos = cell.transform.position;
+                        GameObject cellX = ObjectPools.SharedInstance.GetObjectFromPool(1);
+                        if (cellX != null)
+                        {
+                            cellX.transform.position = pos;
+                            cellX.SetActive(true);
+                            getPositon(cell, cellX);
+                        }
 
-                        cellNew.transform.position = posG;
-                        cellNew.SetActive(true);
-                        Data.gridObjects[y + 1, x] = cellNew;
+                        cell.SetActive(false);
+                        GameObject cellNew = ObjectPools.SharedInstance.GetObjectFromPool(3);
+                        if (cellNew != null)
+                        {
+                            GameObject g = Data.gridObjects[y + 1, x];
+                            Vector3 posG = g.transform.position;
+                            g.SetActive(false);
+                            cellNew.transform.position = posG;
+                            cellNew.SetActive(true);
+                            Data.gridObjects[y + 1, x] = cellNew;
+                        }
+                    }
+
+                    if (cell.CompareTag("point") && cell.activeInHierarchy == true)
+                    {
+
+                        Vector3 pos = cell.transform.position;
+                        GameObject cellX = ObjectPools.SharedInstance.GetObjectFromPool(1);
+                        if (cellX != null)
+                        {
+                            cellX.transform.position = pos;
+                            cellX.SetActive(true);
+                            getPositon(cell, cellX);
+                        }
+
+                        cell.SetActive(false);
+
+                        GameObject cellNew = ObjectPools.SharedInstance.GetObjectFromPool(4);
+                        if (cellNew != null)
+                        {
+                            GameObject g = Data.gridObjects[y + 1, x];
+                            Vector3 posG = g.transform.position;
+                            g.SetActive(false);
+                            cellNew.transform.position = posG;
+                            cellNew.SetActive(true);
+                            Data.gridObjects[y + 1, x] = cellNew;
+                        }
                     }
                 }
-               
-                if (cell.CompareTag("point") && cell.activeInHierarchy == true)
+
+                if (type == 1)
                 {
-                   
-                    Vector3 pos = cell.transform.position;
-                    GameObject cellX = ObjectPools.SharedInstance.GetObjectFromPool(1);
-                    if (cellX != null)
+                    GameObject gameObject = Data.gridObjects[y, x];
+
+                    if (gameObject.CompareTag("box") && gameObject.activeInHierarchy == true ||
+                        gameObject.CompareTag("point") && gameObject.activeInHierarchy == true ||
+                        gameObject.CompareTag("star") && gameObject.activeInHierarchy == true)
                     {
-                        cellX.transform.position = pos;
-                        cellX.SetActive(true);
-                        getPositon(cell, cellX);
+                        //
+                       
+                        GameObject cell = ObjectPools.SharedInstance.GetObjectFromPool(1);
+                        if (cell != null)
+                        {
+                            Debug.Log("cell: " + cell.name);
+                            cell.transform.position = gameObject.transform.position; 
+                            cell.SetActive(true);
+                            Data.gridObjects[y, x] = cell;   
+                            gameObject.SetActive(false);
                     }
+                        } 
+                    
+                }
 
-                    cell.SetActive(false);
-
-
-                    GameObject cellNew = ObjectPools.SharedInstance.GetObjectFromPool(4);
-                    if (cellNew != null)
-                    {
-                        GameObject g = Data.gridObjects[y + 1, x];
-                        Vector3 posG = g.transform.position;
-                        g.SetActive(false);
-
-                        cellNew.transform.position = posG;
-                        cellNew.SetActive(true);
-                        Data.gridObjects[y + 1, x] = cellNew;
-                    }
-
-                }      
-   
             } 
         }       
     }
 
+    //public void resetMatrix()
+    //{
+    //    for (int row = 9; row >= 0; row--)
+    //    {
+    //        for (int col = 0; col < 7; col++)
+    //        {
+    //            GameObject gameObject = Data.gridObjects[row, col];
+    //            Vector3 cellPos = gameObject.transform.position;
+
+    //            if (gameObject != null && gameObject.activeSelf)
+    //            {
+    //                //Debug.Log("GameObject: " + gameObject.name);
+    //                gameObject.SetActive(false);
+    //                GameObject cell = ObjectPools.SharedInstance.GetObjectFromPool(1);
+    //                if (cell != null)
+    //                {
+    //                    cell.transform.position = cellPos;
+    //                    cell.SetActive(true);
+    //                    Data.gridObjects[row, col] = cell;
+    //                }
+    //            }
+    //        }
+    //    }    
+    // }
 
 
-    public void getPositon(GameObject gameCollision, GameObject gameActive)
+        public void getPositon(GameObject gameCollision, GameObject gameActive)
     {
         // Debug.Log("getPositon gameCollision: " + gameCollision.transform.position.y + ": " + gameCollision.transform.position.x);
-        for (int y = 0; y < 9; y++)
+        for (int y = 0; y <= 9; y++)
         {
             for (int x = 0; x < 7; x++)
             {
@@ -132,6 +174,7 @@ public class MatrixLoading : MonoBehaviour
                 if (gameCollision.transform.position.y == cell.transform.position.y && gameCollision.transform.position.x == cell.transform.position.x)
                 {
                     Data.gridObjects[y, x] = gameActive;
+                  
                 }
 
             }

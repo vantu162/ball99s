@@ -56,34 +56,37 @@ public class Matrix : MonoBehaviour
 
 
     public static void Reset()
-    {   
-        for (int row = 0; row < yy; row++)
-        {
-            for (int col = 0; col < xx; col++)
-            {
-                GameObject gameObject = Data.gridObjects[row, col];
-                Vector3 cellPos = gameObject.transform.position;
+    {
+        //for (int row = 9; row >= 0; row--)
+        //{
+        //    for (int col = 0; col < 7; col++)
+        //    {
+        //        GameObject gameObject = Data.gridObjects[row, col];
+        //        Vector3 cellPos = gameObject.transform.position;
 
-                if (gameObject != null && gameObject.activeSelf)
-                {
-                    gameObject.SetActive(false);
-                    GameObject cell = ObjectPools.SharedInstance.GetObjectFromPool(1);
-                    if (cell != null)
-                    {
-                        cell.transform.position = cellPos;
-                        cell.SetActive(true);
-                        Data.gridObjects[row, col] = cell;
-                    }
-                }
-            }
+        //        if (gameObject != null && gameObject.activeSelf)
+        //        {
+        //            Debug.Log("GameObject: " + gameObject.name);
+        //            gameObject.SetActive(false);
+        //            GameObject cell = ObjectPools.SharedInstance.GetObjectFromPool(1);
+        //            if (cell != null)
+        //            {
+        //                cell.transform.position = cellPos;
+        //                cell.SetActive(true);
+        //                Data.gridObjects[row, col] = cell;
+        //            }
+        //        }
+        //    }
+        // }
+            //Debug.Log("nhay vao reset");
+            //MatrixLoading.SharedInstance.loadLaiMaTrix();
+            //Debug.Log("load lai matrix");
         }
-    }
 
   public static void initBox(int rowCurrent)
     {
 
-        MatrixLoading.SharedInstance.loadLaiMaTrix();
-        Data.Instance.upDateRowNext(rowCurrent);
+        MatrixLoading.SharedInstance.loadLaiMaTrix(0);
         for (int x = 0; x < xx; x++)
         {
             khoiTaoDoiTuong(0, x, matrixParent);

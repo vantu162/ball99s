@@ -27,12 +27,17 @@ public class Data: MonoBehaviour
      
     public bool checkSecondBall = true;
 
+    public bool checkTaltol = false;
+
+
 
     public int page = 0;
 
 
     public bool checBtn = false;
 
+
+    public int typeGame = 0;
     public int a = 1;
     public int b = 3;
     public int index = 50;

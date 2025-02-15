@@ -15,7 +15,7 @@ public class Bullet : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
 
-        GetComponent<Rigidbody2D>().velocity = Vector2.Reflect(lastVelocity, collision.contacts[0].normal);
+      //  GetComponent<Rigidbody2D>().velocity = Vector2.Reflect(lastVelocity, collision.contacts[0].normal);
         if (collision.gameObject.tag == "box")
         {
            var x =  TextController.Instance.totalBox + 1;

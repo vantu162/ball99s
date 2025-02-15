@@ -15,6 +15,8 @@ namespace rayCast
         private Rigidbody2D rb2d;
         public float maxRaycastDistance = 10f; // Độ dài tối đa của tia ray
 
+        [SerializeField] GameObject turret;
+
         void Start()
         {
             rb2d = GetComponent<Rigidbody2D>();
@@ -93,6 +95,12 @@ namespace rayCast
                 }
 
                 direction = (endPoint - initRayPos).normalized;
+
+                Vector3 dir = endPoint - initRayPos; // Hướng của đường line
+                float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg; // Tính góc xoay
+                turret.transform.rotation = Quaternion.Euler(0, 0, angle); // Xoay turret
+
+
                 Vector2 step = direction * 0.25f;
                 // Tính vị trí mới
                 Vector2 newPosition = initRayPos + step;
@@ -167,7 +175,7 @@ namespace rayCast
             Data.Instance.checkShoot = false;
             for (int i = 0; i < Data.Instance.tatolBullet; i++)
             {
-                yield return new WaitForSeconds(0.1f);
+                yield return new WaitForSeconds(0.15f);
                 GameObject ball = ObjectPools.SharedInstance.GetObjectFromPool(5);
                 TextController.Instance.totalBall -= 1;
 
@@ -178,7 +186,7 @@ namespace rayCast
 
                         Data.Instance.boolFisrtBall = true;
                     }
-                    ball.transform.position = transform.position;
+                    ball.transform.position = turret.transform.position;
                     ball.SetActive(true);
                     ball.transform.SetParent(canvas.transform, true);
 

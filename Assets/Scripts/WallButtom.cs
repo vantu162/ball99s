@@ -17,20 +17,21 @@ public class WallButtom : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("Va chạm với: " + collision.transform.tag);
+        
 
         if (collision.transform.tag == "ballFirst")
         {
 
             checkInitMatrixFirst = true;
-            Debug.Log("checkSecondBall =====> " + Data.Instance.checkSecondBall);
+            //Debug.Log("checkSecondBall =====> " + Data.Instance.checkSecondBall);
             Data.Instance.statusGame = 1;
             //Data.Instance.checkShoot = true;
 
             if (checkInitMatrixFirst && Data.Instance.checkSecondBall)
             {
+                Debug.Log("Va chạm với: " + collision.transform.tag + " vvvv: " + checkInitMatrixFirst);
                 TextController.Instance.totalBall = Data.Instance.tatolBullet;
-                Matrix.initBox(Data.Instance.rowY);
+                Matrix.initBox(0);
                 checkInitMatrixFirst = !checkInitMatrixFirst;
                 Data.Instance.checkSecondBall = false;
             }

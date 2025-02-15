@@ -40,13 +40,13 @@ public class ObjectPools: MonoBehaviour
     {
         switch (type)
         {
-            case 0:  return 56; // cell
-            case 1:  return 300;// dot dir
+            case 0:  return 300; // dots dir
+            case 1:  return 126;// cell
             case 2:  return 100; // box
             case 3: return 50; // star
             case 4: return 50; // point
             case 5: return 150; // point
-            case 6: return 100; // item level
+         
   
         }
 
@@ -70,6 +70,18 @@ public class ObjectPools: MonoBehaviour
         {
             Debug.LogError("Invalid objectTypeIndex: " + objectTypeIndex);
             return null;
+        }
+    }
+
+    public void ActivateAllBulllet_False()
+    {
+        foreach (List<GameObject> objectList in pooledObjects)
+        {
+            foreach (GameObject obj in objectList)
+            {
+                if (obj != null && obj.activeInHierarchy && obj.CompareTag("bullet"))
+                    obj.SetActive(false);
+            }
         }
     }
 }

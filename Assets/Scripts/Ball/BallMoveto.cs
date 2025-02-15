@@ -15,11 +15,11 @@ public class BallMoveto : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        
+
 
         if (Move == true)
         {
-           step = speed * Time.deltaTime;
+            step = speed * Time.deltaTime;
 
             gameObject.transform.position = Vector2.MoveTowards(gameObject.transform.position, WallButtom.posFirst, step);
             if (Vector2.Distance(gameObject.transform.position, WallButtom.posFirst) < 0.0001f)
@@ -45,142 +45,88 @@ public class BallMoveto : MonoBehaviour
     private int collisionCountBox = 0;
     private Vector2 lastCollisionPointT, lastCollisionPointL, lastCollisionPointR, lastCollisionPointBox; // Vị trí va chạm cuối cùng
 
+
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        Vector2 currentCollisionPoint = collision.contacts[0].point;
+
+        //Debug.Log("name =========> " + collision.gameObject.name);
 
         if (collision.gameObject.name == "Top")
         {
-            Vector2 currentCollisionPoint = collision.contacts[0].point;
-
-            // Kiểm tra nếu khoảng cách giữa vị trí va chạm hiện tại và cuối cùng là nhỏ
-            if (Vector2.Distance(currentCollisionPoint, lastCollisionPointT) < 0.01f)
-            {
-                collisionCountT++; // Tăng biến đếm
-            }
-            else
-            {
-                // Đặt lại biến đếm và cập nhật vị trí va chạm cuối cùng
-                collisionCountT = 1;
-                lastCollisionPointT = currentCollisionPoint;
-            }
-
-            if (collisionCountT > 2)
-            {
-                // Đổi hướng của gameObject
-                ChangeDirection(45f, 0);
-            }
+            HandleRepeatedCollision(ref collisionCountT, ref lastCollisionPointT, currentCollisionPoint,randomAngle(10,45), 0);
         }
-
-        if (collision.gameObject.name == "Left")
+        else if (collision.gameObject.name == "Left")
         {
-            Vector2 currentCollisionPoint = collision.contacts[0].point;
-
-            // Kiểm tra nếu khoảng cách giữa vị trí va chạm hiện tại và cuối cùng là nhỏ
-            if (Vector2.Distance(currentCollisionPoint, lastCollisionPointL) < 0.01f)
-            {
-                collisionCountL++; // Tăng biến đếm
-            }
-            else
-            {
-                // Đặt lại biến đếm và cập nhật vị trí va chạm cuối cùng
-                collisionCountL = 1;
-                lastCollisionPointL = currentCollisionPoint;
-            }
-
-            if (collisionCountL > 2)
-            {
-                // Đổi hướng của gameObject
-                ChangeDirection(135f,1);
-            }
+            HandleRepeatedCollision(ref collisionCountL, ref lastCollisionPointL, currentCollisionPoint,randomAngle(45, 90), 1);
         }
-
-        if (collision.gameObject.name == "Right")
+        else if (collision.gameObject.name == "Right")
         {
-            Vector2 currentCollisionPoint = collision.contacts[0].point;
-
-            // Kiểm tra nếu khoảng cách giữa vị trí va chạm hiện tại và cuối cùng là nhỏ
-            if (Vector2.Distance(currentCollisionPoint, lastCollisionPointR) < 0.01f)
-            {
-                collisionCountR++; // Tăng biến đếm
-            }
-            else
-            {
-                // Đặt lại biến đếm và cập nhật vị trí va chạm cuối cùng
-                collisionCountR = 1;
-                lastCollisionPointR = currentCollisionPoint;
-            }
-
-            if (collisionCountR > 2)
-            {
-
-                ChangeDirection(-135f,2);
-            }
+            HandleRepeatedCollision(ref collisionCountR, ref lastCollisionPointR, currentCollisionPoint,randomAngle(-90, -45), 2);
         }
-
-
-        if (collision.gameObject.name == "box")
+        else if (collision.gameObject.name == "box")
         {
-            Vector2 currentCollisionPoint = collision.contacts[0].point;
-
-            // Kiểm tra nếu khoảng cách giữa vị trí va chạm hiện tại và cuối cùng là nhỏ
-            if (Vector2.Distance(currentCollisionPoint, lastCollisionPointBox) < 0.01f)
-            {
-                collisionCountBox++; // Tăng biến đếm
-            }
-            else
-            {
-                // Đặt lại biến đếm và cập nhật vị trí va chạm cuối cùng
-                collisionCountBox = 1;
-                lastCollisionPointBox = currentCollisionPoint;
-            }
-
-            if (collisionCountBox > 2)
-            {
-                // Đổi hướng của gameObject
-
-                var x = randomAngle(90);
-                ChangeDirection(x, 2);
-            }
+            HandleRepeatedCollision(ref collisionCountBox, ref lastCollisionPointBox, currentCollisionPoint, randomAngle(10,145), 2);
         }
-
-
     }
 
-    private  int randomAngle(int maxValue)
+    private void HandleRepeatedCollision(ref int collisionCount, ref Vector2 lastCollisionPoint, Vector2 currentCollisionPoint, float defaultAngle, int resetIndex)
+    {
+        if (Vector2.Distance(currentCollisionPoint, lastCollisionPoint) < 0.05f)
+        {
+            collisionCount++;
+        }
+        else
+        {
+            collisionCount = 1;
+            lastCollisionPoint = currentCollisionPoint;
+        }
+
+        if (collisionCount > 2) // Nếu va chạm nhiều lần tại cùng vị trí
+        {
+            float newAngle = defaultAngle + randomAngle(10,20); // Thêm một độ lệch ngẫu nhiên
+            ChangeDirection(newAngle, resetIndex);
+        }
+    }
+
+    private int randomAngle(int minValue, int maxValue)
     {
         System.Random random = new System.Random();
-        int value = random.Next(45, maxValue);
-        return value;
+        return random.Next(minValue, maxValue); // Tránh giá trị quá nhỏ
     }
-    private void ChangeDirection(float angleInDegrees, int v)
+
+    private void ChangeDirection(float angleInDegrees, int resetIndex)
     {
         Rigidbody2D rb = GetComponent<Rigidbody2D>();
         if (rb != null)
         {
-            // Lấy góc hiện tại của vận tốc
+            float speed = rb.velocity.magnitude;
             float currentAngle = Mathf.Atan2(rb.velocity.y, rb.velocity.x) * Mathf.Rad2Deg;
-
-            // Đổi hướng vận tốc với góc mới
             float newAngle = currentAngle + angleInDegrees;
-            Vector2 newVelocity = Quaternion.AngleAxis(newAngle, Vector3.forward) * rb.velocity;
+
+            Vector2 newVelocity = new Vector2(Mathf.Cos(newAngle * Mathf.Deg2Rad), Mathf.Sin(newAngle * Mathf.Deg2Rad)) * speed;
             rb.velocity = newVelocity;
         }
 
+        ResetCollisionState(resetIndex);
+    }
+    private void ResetCollisionState(int v)
+    {
         if (v == 0)
-        { 
+        {
             collisionCountT = 0;
             lastCollisionPointT = Vector2.zero;
         }
-        else if(v == 1)
-        { 
+        else if (v == 1)
+        {
             collisionCountL = 0;
-           lastCollisionPointL = Vector2.zero;
-        }else if(v == 2)
+            lastCollisionPointL = Vector2.zero;
+        }
+        else if (v == 2)
         {
             collisionCountR = 0;
             lastCollisionPointR = Vector2.zero;
         }
-        // Đặt lại biến đếm và vị trí va chạm cuối cùng    
     }
-
 }

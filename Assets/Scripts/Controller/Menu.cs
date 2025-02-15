@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Menu : MonoBehaviour
 {
@@ -56,5 +57,11 @@ public class Menu : MonoBehaviour
     {
 
         Level.Instance.buy(1);
+    }
+
+    public void loadSecene()
+    {
+
+        SceneManager.LoadScene("SampleScene");
     }
 }
