@@ -23,7 +23,7 @@ public class ImageCell: MonoBehaviour
                     return imgs[i];
                 }
             }
-            else
+            if(num >= 4)
             {
                 if (i == 1)
                 {

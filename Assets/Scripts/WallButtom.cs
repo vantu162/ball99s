@@ -21,7 +21,6 @@ public class WallButtom : MonoBehaviour
 
         if (collision.transform.tag == "ballFirst")
         {
-
             checkInitMatrixFirst = true;
             //Debug.Log("checkSecondBall =====> " + Data.Instance.checkSecondBall);
             Data.Instance.statusGame = 1;
@@ -29,7 +28,7 @@ public class WallButtom : MonoBehaviour
 
             if (checkInitMatrixFirst && Data.Instance.checkSecondBall)
             {
-                Debug.Log("Va chạm với: " + collision.transform.tag + " vvvv: " + checkInitMatrixFirst);
+                Debug.Log("Va chạm với: " + collision.transform.tag);
                 TextController.Instance.totalBall = Data.Instance.tatolBullet;
                 Matrix.initBox(0);
                 checkInitMatrixFirst = !checkInitMatrixFirst;
@@ -81,5 +80,20 @@ public class WallButtom : MonoBehaviour
 
      
     }
+
+    //private void OnTriggerEnter2D(Collider2D col)
+    //{
+    //    Collider2D collider = GetComponent<Collider2D>(); // Lấy Collider2D của GameObject này
+
+    //    if (col.transform.tag == "ballFirst")
+    //    {
+    //        if (collider != null && !collider.isTrigger)
+    //        {
+    //            collider.isTrigger = true; // Đánh dấu Trigger nếu chưa được bật
+              
+    //        }
+    //    }
+    //}
+
 
 }

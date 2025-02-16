@@ -113,7 +113,7 @@ public class GameController : MonoBehaviour
             Data.Instance.b = 6;
 
         }
-
+        ObjectPools.SharedInstance.ActivateAllBulllet_False();
         MatrixLoading.SharedInstance.loadLaiMaTrix(1);
         ballFirst.SetActive(true);
         Data.Instance.checkSecondBall = true;

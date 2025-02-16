@@ -19,7 +19,8 @@ namespace rayCast
 
         void Start()
         {
-            rb2d = GetComponent<Rigidbody2D>();
+           
+            rb2d = GetComponent<Rigidbody2D>(); 
             rb2d.gravityScale = 0;
             if (gameObject.GetComponent<LineRenderer>() != null)
             {
@@ -33,6 +34,8 @@ namespace rayCast
 
         void FixedUpdate()
         {
+
+            //rb2d.velocity = new Vector2(10f, rb2d.velocity.y);
             var status = EnumScript.gameStatus.play;
 
             if ((int)status == Data.Instance.statusGame)
@@ -74,8 +77,9 @@ namespace rayCast
 
         private Vector2 direction;
         private float angle;
-        public float angleMin;
-        public float angleMax;
+
+        [SerializeField] Vector2 angleMinMax;
+  
         void DrawLine(Vector2 initRayPos, Vector2 lastRayPos, int linePosIndex)
         {
      
@@ -83,31 +87,40 @@ namespace rayCast
             {
                 RaycastHit2D hit = Physics2D.Raycast(initRayPos, lastRayPos - initRayPos, Vector3.Distance(lastRayPos, initRayPos), _layerMask);
                 Vector2 endPoint = lastRayPos;
-                if (hit.collider != null)
-                {
-                    endPoint = hit.point;
-                    float remDist = Vector3.Distance(lastRayPos, initRayPos) - hit.distance;
-                    Vector2 refVect = remDist * Vector2.Reflect((hit.point - initRayPos), hit.normal).normalized;
-                    DrawLine(hit.point + new Vector2(refVect.x * 0.01f, refVect.y * 0.01f), refVect + hit.point, linePosIndex + 1);
-                    Debug.DrawLine(hit.point, hit.point + refVect.normalized * .2f, Color.blue);
-                    // Khoi tao dot 
-                   DottedLine.DottedLine.Instance.DrawDottedLine(hit.point, hit.point + refVect.normalized * .2f);
-                }
-
-                direction = (endPoint - initRayPos).normalized;
-
                 Vector3 dir = endPoint - initRayPos; // Hướng của đường line
-                float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg; // Tính góc xoay
+                float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg -90f; // Tính góc xoay
+
+              //  Debug.Log("Tính toán góc: " + angle);
+
                 turret.transform.rotation = Quaternion.Euler(0, 0, angle); // Xoay turret
 
+                //if (angle >= angleMinMax.x && angle <= angleMinMax.y )
+                //{
+                    //Data.Instance.checkShoot = true; 
+                    if (hit.collider != null)
+                        {
+                            endPoint = hit.point;
+                            float remDist = Vector3.Distance(lastRayPos, initRayPos) - hit.distance;
+                            Vector2 refVect = remDist * Vector2.Reflect((hit.point - initRayPos), hit.normal).normalized;
+                            DrawLine(hit.point + new Vector2(refVect.x * 0.01f, refVect.y * 0.01f), refVect + hit.point, linePosIndex + 1);
+                            Debug.DrawLine(hit.point, hit.point + refVect.normalized * .2f, Color.blue);
+                            // Khoi tao dot 
+                           DottedLine.DottedLine.Instance.DrawDottedLine(hit.point, hit.point + refVect.normalized * .2f);
+                        }
 
-                Vector2 step = direction * 0.25f;
-                // Tính vị trí mới
-                Vector2 newPosition = initRayPos + step;
-                // Khoi tao dot 
-                DottedLine.DottedLine.Instance.DrawDottedLine(newPosition, endPoint);
-                Debug.DrawRay(initRayPos, lastRayPos - initRayPos);
-             
+                        direction = (endPoint - initRayPos).normalized;
+                        Vector2 step = direction * 0.25f;
+                        // Tính vị trí mới
+                        Vector2 newPosition = initRayPos + step;
+                        // Khoi tao dot 
+                        DottedLine.DottedLine.Instance.DrawDottedLine(newPosition, endPoint);
+                        Debug.DrawRay(initRayPos, lastRayPos - initRayPos);
+                //}
+                //else
+                //{
+                //    Data.Instance.checkShoot = false;
+                //}
+
             }
 
         }
@@ -134,33 +147,6 @@ namespace rayCast
                 
                 if (!Data.Instance.checBtn && Input.GetMouseButtonUp(0))
                 {
-
-                    //// Kiểm tra nếu bấm vào một GameObject trong thế giới 2D
-                    //Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                    //RaycastHit2D hit = Physics2D.Raycast(mousePos, Vector2.zero);
-
-
-                    ////Collider2D[] hits = Physics2D.OverlapPointAll(mousePos);
-
-                    ////foreach (Collider2D h in hits)
-                    ////{
-                    ////    Debug.Log("Found: " + h.gameObject.name);
-                    ////}
-
-
-                    //if (hit.collider != null)
-                    //{
-                    //    Debug.Log("Bấm vào GameObject khác: " + hit.collider.gameObject.name);
-                    //    // Kiểm tra nếu GameObject có tag là "menu"
-                    //    if (hit.collider.CompareTag("menu"))
-                    //    {
- 
-                    //        return; // Không chạy sự kiện Input.GetMouseButtonUp(0)
-                    //    }
-                    //}
-
-
-
                     if (Data.Instance.checkShoot == true )
                     {
                         StartCoroutine(ShootBalls());
