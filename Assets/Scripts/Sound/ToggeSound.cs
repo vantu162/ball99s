@@ -16,18 +16,19 @@ public class ToggeSound : MonoBehaviour
     {
         step = speed * Time.deltaTime;
 
-        handle.transform.position = Vector3.MoveTowards(handle.transform.position, on.transform.position,  100f);
-        //on.SetActive(true);
-        //off.SetActive(false);
+        handle.transform.position = Vector3.MoveTowards(handle.transform.position, on.transform.position,  110f);
+        on.SetActive(false);
+        off.SetActive(true);
         Debug.Log("Turn On");
     }
     public void turnOff()
     {
-        //on.SetActive(false);
-        //off.SetActive(true);
+        on.SetActive(true);
+        off.SetActive(false);
         step = speed * Time.deltaTime;
 
-        handle.transform.position = Vector3.MoveTowards(handle.transform.position, off.transform.position, 100f);
+
+        handle.transform.position = Vector3.MoveTowards(handle.transform.position, off.transform.position, 110f);
         Debug.Log("TurnOff");
     }
 
