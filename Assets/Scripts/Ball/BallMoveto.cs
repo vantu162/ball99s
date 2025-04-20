@@ -16,7 +16,6 @@ public class BallMoveto : MonoBehaviour
     private void FixedUpdate()
     {
 
-
         if (Move == true)
         {
             step = speed * Time.deltaTime;
@@ -24,6 +23,7 @@ public class BallMoveto : MonoBehaviour
             gameObject.transform.position = Vector2.MoveTowards(gameObject.transform.position, WallButtom.posFirst, step);
             if (Vector2.Distance(gameObject.transform.position, WallButtom.posFirst) < 0.0001f)
             {
+                Debug.Log("nhay vao day");
                 this.gameObject.SetActive(false);
 
                 this.transform.GetComponent<CircleCollider2D>().enabled = true;

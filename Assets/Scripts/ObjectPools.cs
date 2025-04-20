@@ -68,7 +68,7 @@ public class ObjectPools: MonoBehaviour
         }
         else
         {
-            Debug.LogError("Invalid objectTypeIndex: " + objectTypeIndex);
+            //Debug.LogError("Invalid objectTypeIndex: " + objectTypeIndex);
             return null;
         }
     }

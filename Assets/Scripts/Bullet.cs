@@ -5,12 +5,12 @@ using UnityEngine.UI;
 
 public class Bullet : MonoBehaviour
 {
-    private Vector2 lastVelocity;
+    //private Vector2 lastVelocity;
 
-    void FixedUpdate()
-    {
-        lastVelocity = GetComponent<Rigidbody2D>().velocity;
-    }
+    //void FixedUpdate()
+    //{
+    //    lastVelocity = GetComponent<Rigidbody2D>().velocity;
+    //}
 
     private void OnCollisionEnter2D(Collision2D collision)
     {

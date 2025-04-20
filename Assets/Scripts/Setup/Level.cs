@@ -33,7 +33,7 @@ public class Level: MonoBehaviour
         if (File.Exists(path))
         {
             string jsonContent = File.ReadAllText(path);
-            Debug.Log("jsonContent: " + jsonContent);
+            //Debug.Log("jsonContent: " + jsonContent);
             //ObjLevel obj = JsonConvert.DeserializeObject<ObjLevel>(jsonContent);
             ObjLevel data = JsonUtility.FromJson<ObjLevel>(jsonContent);
 
@@ -71,7 +71,7 @@ public class Level: MonoBehaviour
         // Write the JSON to a file
         File.WriteAllText(filePath, jsonData);
 
-        Debug.Log($"Data saved to {filePath}");
+        //Debug.Log($"Data saved to {filePath}");
 
     }
 
@@ -125,7 +125,7 @@ public class Level: MonoBehaviour
         // Write the JSON to a file
         File.WriteAllText(filePath, jsonData);
 
-        Debug.Log($"Data saved to {filePath}");
+        //Debug.Log($"Data saved to {filePath}");
 
 
        // readData();

@@ -14,7 +14,7 @@ public class MatrixLoading : MonoBehaviour
     }
     public void loadLaiMaTrix(int type)
     {
-        for (int y = 9; y >=0; y--)
+        for (int y = 8; y >=0; y--)
         {
             for (int x = 0; x < 7; x++)
             {
@@ -27,7 +27,7 @@ public class MatrixLoading : MonoBehaviour
                     if (cell.CompareTag("box") && cell.activeInHierarchy == true)
                     {
                         cell.SetActive(false);
-                        Debug.Log("yx: " + y + "_" + x + "| name: " + cell.name);
+                      //  Debug.Log("yx: " + y + "_" + x + "| name: " + cell.name);
                         Text textNum = cell.GetComponentInChildren<Text>();
                         //Debug.Log("yx: " + y + "_" + x);
                         //Debug.Log("yx*: " + (y + 1) + "_" + x +" || "+ int.Parse(textNum.text));
@@ -123,7 +123,7 @@ public class MatrixLoading : MonoBehaviour
                         GameObject cell = ObjectPools.SharedInstance.GetObjectFromPool(1);
                         if (cell != null)
                         {
-                            Debug.Log("cell: " + cell.name);
+                            //Debug.Log("cell: " + cell.name);
                             cell.transform.position = gameObject.transform.position; 
                             cell.SetActive(true);
                             Data.gridObjects[y, x] = cell;   
@@ -137,36 +137,10 @@ public class MatrixLoading : MonoBehaviour
         }       
     }
 
-    //public void resetMatrix()
-    //{
-    //    for (int row = 9; row >= 0; row--)
-    //    {
-    //        for (int col = 0; col < 7; col++)
-    //        {
-    //            GameObject gameObject = Data.gridObjects[row, col];
-    //            Vector3 cellPos = gameObject.transform.position;
-
-    //            if (gameObject != null && gameObject.activeSelf)
-    //            {
-    //                //Debug.Log("GameObject: " + gameObject.name);
-    //                gameObject.SetActive(false);
-    //                GameObject cell = ObjectPools.SharedInstance.GetObjectFromPool(1);
-    //                if (cell != null)
-    //                {
-    //                    cell.transform.position = cellPos;
-    //                    cell.SetActive(true);
-    //                    Data.gridObjects[row, col] = cell;
-    //                }
-    //            }
-    //        }
-    //    }    
-    // }
-
-
         public void getPositon(GameObject gameCollision, GameObject gameActive)
     {
         // Debug.Log("getPositon gameCollision: " + gameCollision.transform.position.y + ": " + gameCollision.transform.position.x);
-        for (int y = 0; y <= 9; y++)
+        for (int y = 0; y <= 8; y++)
         {
             for (int x = 0; x < 7; x++)
             {

@@ -15,7 +15,7 @@ public class GameWin : MonoBehaviour
 
         if(TextController.Instance.totalStar == 5 && TextController.Instance.totalGold == 5)
         {
-            GameController.SharedInstance.gamePlay.SetActive(true);
+          //  GameController.SharedInstance.gamePlay.SetActive(true);
         }
     }
 }

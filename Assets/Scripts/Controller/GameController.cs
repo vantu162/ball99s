@@ -31,9 +31,11 @@ public class GameController : MonoBehaviour
         Data.Instance.checkSecondBall = true;
         gamePlay.SetActive(false);
         Rigidbody2D rb = ballFirst.GetComponent<Rigidbody2D>();
+        rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
+        //rb.velocity = new Vector2(0f, -1f);
         rb.gravityScale = 0.3f;
         Data.Instance.index = 50;
-        Data.Instance.b = 3;
+        Data.Instance.b = 3;  
       //  headerAll.SetActive(false);
     }
 
@@ -46,6 +48,8 @@ public class GameController : MonoBehaviour
         Data.Instance.checkSecondBall = true;
         gamePlay.SetActive(false);
         Rigidbody2D rb = ballFirst.GetComponent<Rigidbody2D>();
+        rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
+        //rb.velocity = new Vector2(0f, -1f);
         rb.gravityScale = 0.3f;
         Data.Instance.index = 50;
         Data.Instance.b = 6;
@@ -72,7 +76,6 @@ public class GameController : MonoBehaviour
         Rigidbody2D rb = ballFirst.GetComponent<Rigidbody2D>();
         rb.gravityScale = 0;
 
-        Level.Instance.readData();
         TextController.Instance.UpdateTotalStar(0);
         TextController.Instance.UpdateTotalGold(0);
         TextController.Instance.UpdateTotalBox(0);
@@ -85,6 +88,9 @@ public class GameController : MonoBehaviour
         MatrixLoading.SharedInstance.loadLaiMaTrix(1);
 
         Data.Instance.checBtn = false;
+
+        Data.Instance.tatolBullet = 0;
+        TextController.Instance.totalBall = Data.Instance.tatolBullet;
 
 
 
@@ -99,7 +105,8 @@ public class GameController : MonoBehaviour
 
     public void Reset()
     {
-
+     
+        Time.timeScale = 1;
         if (Data.Instance.typeGame == 0)
         {
             Data.Instance.index = 50;
@@ -113,11 +120,15 @@ public class GameController : MonoBehaviour
             Data.Instance.b = 6;
 
         }
+
+        TextController.Instance.totalBall = Data.Instance.tatolBullet;
+
         ObjectPools.SharedInstance.ActivateAllBulllet_False();
         MatrixLoading.SharedInstance.loadLaiMaTrix(1);
         ballFirst.SetActive(true);
         Data.Instance.checkSecondBall = true;
         Rigidbody2D rb = ballFirst.GetComponent<Rigidbody2D>();
+        rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
         rb.gravityScale = 0.3f;
        
         Level.Instance.readData();
@@ -126,8 +137,9 @@ public class GameController : MonoBehaviour
         TextController.Instance.UpdateTotalBox(0);
      
         gameOver.SetActive(false);
+    
 
-       
+
     }
 
     public void hideGamePlay()
@@ -155,18 +167,26 @@ public class GameController : MonoBehaviour
     public void gameEnd()
     {
 
+
+        Data.Instance.tatolBullet = 0;
+        Data.Instance.statusGame = 2;
+        Time.timeScale = 0;
         Debug.Log("ballFirst ==================> " + ballFirst.activeSelf);
         gameOver.SetActive(true);
         Transform ballTransform = ballFirst.transform;
         ballTransform.position = new Vector3(0.00f, 0.40f, 90.00f);
         Rigidbody2D rb = ballFirst.GetComponent<Rigidbody2D>();
+        rb.velocity = Vector2.zero;
+        rb.angularVelocity = 0f;
         rb.gravityScale = 0;
         Data.Instance.checkShoot = false;
 
         GameEnd.Instance.saveTurn();
-   
-        StartCoroutine(ExecuteAfterDelay());
-      
+
+        TextController.Instance.totalBall = 0;
+
+        //StartCoroutine(ExecuteAfterDelay());
+
     }
 
     private IEnumerator ExecuteAfterDelay()

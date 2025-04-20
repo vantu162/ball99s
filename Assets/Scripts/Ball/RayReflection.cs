@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 namespace rayCast
 {
@@ -22,6 +23,7 @@ namespace rayCast
            
             rb2d = GetComponent<Rigidbody2D>(); 
             rb2d.gravityScale = 0;
+            rb2d.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
             if (gameObject.GetComponent<LineRenderer>() != null)
             {
                 line = gameObject.GetComponent<LineRenderer>();
@@ -34,6 +36,7 @@ namespace rayCast
 
         void FixedUpdate()
         {
+
 
             //rb2d.velocity = new Vector2(10f, rb2d.velocity.y);
             var status = EnumScript.gameStatus.play;
@@ -141,7 +144,7 @@ namespace rayCast
 
 
             var status = EnumScript.gameStatus.play;
-
+           // Debug.Log("Dastatus: " + Data.Instance.tatolBullet);
             if ((int)status == Data.Instance.statusGame)
             {
                 
@@ -157,12 +160,21 @@ namespace rayCast
 
         public IEnumerator ShootBalls()
         {
-           // Debug.Log("Data.tatolBullet: " + Data.Instance.tatolBullet);
+            Debug.Log("Data.tatolBullet: " + Data.Instance.tatolBullet);
             Data.Instance.checkShoot = false;
             for (int i = 0; i < Data.Instance.tatolBullet; i++)
             {
+                Debug.Log("bullet pos: " + i);
                 yield return new WaitForSeconds(0.15f);
                 GameObject ball = ObjectPools.SharedInstance.GetObjectFromPool(5);
+                if (ball.GetComponent<BallMoveto>().Move == true)
+                {
+                    ball.GetComponent<CircleCollider2D>().enabled = true;
+                    ball.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
+                    ball.GetComponent<BallMoveto>().Move = false;
+                }
+            
+
                 TextController.Instance.totalBall -= 1;
 
                 if (ball != null)
@@ -175,15 +187,19 @@ namespace rayCast
                     ball.transform.position = turret.transform.position;
                     ball.SetActive(true);
                     ball.transform.SetParent(canvas.transform, true);
-
-                    // ball.GetComponent<Rigidbody2D>().AddForce(direction * 500f); // Sử dụng hướng tính được từ đường line
-
                     Vector2 force = direction * 375f;
                     ball.GetComponent<Rigidbody2D>().AddForce(force);
+
                 }
 
             }
-            gameObjectFirst.SetActive(false);
+
+            Image img = gameObject.GetComponent<Image>();
+            if (img != null)
+            {
+             
+                img.enabled = false;
+            }
         }
 
     }

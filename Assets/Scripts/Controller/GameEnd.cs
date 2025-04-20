@@ -28,7 +28,7 @@ public class GameEnd : MonoBehaviour
 
         getTextPoint();
         getTextStar();
-        getTextGold();
+      //  getTextGold();
 
 
         var box = TextController.Instance.totalBox;
@@ -76,19 +76,19 @@ public class GameEnd : MonoBehaviour
         }
     }
 
-    public void getTextGold()
-    {
-        var v = TextController.Instance.totalGold;
+    //public void getTextGold()
+    //{
+    //    var v = TextController.Instance.totalGold;
 
-        Text textNum = textGold.GetComponent<Text>();
-        if (textNum != null)
-        {
-            textNum.text = v.ToString();
-        }
-        else
-        {
-            Debug.LogError("Text component not found in itemCenter's children.");
-        }
-    }
+    //    Text textNum = textGold.GetComponent<Text>();
+    //    if (textNum != null)
+    //    {
+    //        textNum.text = v.ToString();
+    //    }
+    //    else
+    //    {
+    //        Debug.LogError("Text component not found in itemCenter's children.");
+    //    }
+    //}
 
 }
